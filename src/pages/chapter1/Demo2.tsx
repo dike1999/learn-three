@@ -64,8 +64,10 @@ const Demo2 = () => {
   };
 
   useEffect(() => {
-    init();
-  }, []);
+    if (!demo.current?.childElementCount) {
+      init();
+    }
+  }, [demo]);
 
   return <div ref={demo}></div>;
 };
