@@ -1,4 +1,4 @@
-import Demo from "@/pages/chapter1/Demo2";
+import Demo from "@/pages/chapter1/Demo3";
 
 const App = () => {
   return <Demo />;

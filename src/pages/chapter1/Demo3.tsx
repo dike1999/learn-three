@@ -1,16 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import model from "./models/model2";
+import model from "./models/model3";
 
-const Demo2 = () => {
+const Demo3 = () => {
   const demo = useRef<HTMLDivElement>(null);
 
   const init = () => {
     const scene = new THREE.Scene();
 
-    model.createPlaneAxes(scene);
     model.createCube(scene);
+    model.createPlane(scene);
     model.createSphere(scene);
+    model.createSpotLight(scene);
+    model.createTree(scene);
+    model.createHouse(scene);
+    model.createGroundPlane(scene);
+    model.createBoundingWall(scene);
 
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -24,6 +29,8 @@ const Demo2 = () => {
     const render = new THREE.WebGLRenderer();
     render.setClearColor(new THREE.Color(0x000000));
     render.setSize(window.innerWidth, window.innerHeight);
+    render.shadowMap.enabled = true;
+
     demo.current?.appendChild(render.domElement);
     render.render(scene, camera);
   };
@@ -37,4 +44,4 @@ const Demo2 = () => {
   return <div ref={demo}></div>;
 };
 
-export default Demo2;
+export default Demo3;
