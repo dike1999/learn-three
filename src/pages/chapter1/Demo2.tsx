@@ -24,15 +24,13 @@ const Demo2 = () => {
     const render = new THREE.WebGLRenderer();
     render.setClearColor(new THREE.Color(0x000000));
     render.setSize(window.innerWidth, window.innerHeight);
-    demo.current?.appendChild(render.domElement);
+    demo.current?.replaceChildren(render.domElement);
     render.render(scene, camera);
   };
 
   useEffect(() => {
-    if (!demo.current?.childElementCount) {
-      init();
-    }
-  }, [demo]);
+    init();
+  }, []);
 
   return <div ref={demo}></div>;
 };

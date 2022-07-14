@@ -31,15 +31,13 @@ const Demo3 = () => {
     render.setSize(window.innerWidth, window.innerHeight);
     render.shadowMap.enabled = true;
 
-    demo.current?.appendChild(render.domElement);
+    demo.current?.replaceChildren(render.domElement);
     render.render(scene, camera);
   };
 
   useEffect(() => {
-    if (!demo.current?.childElementCount) {
-      init();
-    }
-  }, [demo]);
+    init();
+  }, []);
 
   return <div ref={demo}></div>;
 };
