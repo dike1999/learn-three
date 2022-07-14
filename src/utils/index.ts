@@ -11,7 +11,7 @@ import { TrackballControls } from "three/examples/jsm/controls/TrackballControls
 export function initStats(type: number) {
   const stats = new Stats();
   stats.showPanel(type);
-  document.body.appendChild(stats.dom);
+  document.getElementById("stats-js")?.replaceChildren(stats.dom);
 
   return stats;
 }
