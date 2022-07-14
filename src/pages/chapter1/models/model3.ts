@@ -38,7 +38,7 @@ function createPlane(scene: THREE.Scene) {
   scene.add(plane);
 }
 
-function createSpotLight(scene: THREE.Scene) {
+function createLight(scene: THREE.Scene) {
   const spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(-40, 40, -15);
   spotLight.castShadow = true;
@@ -47,7 +47,7 @@ function createSpotLight(scene: THREE.Scene) {
   spotLight.shadow.camera.near = 40;
 
   // If you want a more detailled shadow you can increase the mapSize used to draw the shadows.
-  // spotLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
+  spotLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
   scene.add(spotLight);
 
   const ambienLight = new THREE.AmbientLight(0x353535);
@@ -162,7 +162,7 @@ function createHouse(scene: THREE.Scene) {
 export default {
   createBoundingWall,
   createTree,
-  createSpotLight,
+  createLight,
   createSphere,
   createHouse,
   createGroundPlane,

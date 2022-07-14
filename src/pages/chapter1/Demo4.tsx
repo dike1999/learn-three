@@ -1,21 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import model from "./models/model3";
+import model from "./models/model4";
 
-const Demo3 = () => {
+const Demo4 = () => {
   const demo = useRef<HTMLDivElement>(null);
 
   const init = () => {
     const scene = new THREE.Scene();
 
-    model.createCube(scene);
+    const cube = model.createCube(scene);
+    const sphere = model.createSphere(scene);
     model.createPlane(scene);
-    model.createSphere(scene);
     model.createLight(scene);
-    model.createTree(scene);
-    model.createHouse(scene);
-    model.createGroundPlane(scene);
-    model.createBoundingWall(scene);
 
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -32,7 +28,28 @@ const Demo3 = () => {
     render.shadowMap.enabled = true;
 
     demo.current?.replaceChildren(render.domElement);
-    render.render(scene, camera);
+
+    // call the render function
+    var step = 0;
+
+    function renderScene() {
+      // stats.update();
+      // rotate the cube around its axes
+      cube.rotation.x += 0.02;
+      cube.rotation.y += 0.02;
+      cube.rotation.z += 0.02;
+
+      // bounce the sphere up and down
+      step += 0.04;
+      sphere.position.x = 20 + 10 * Math.cos(step);
+      sphere.position.y = 2 + 10 * Math.abs(Math.sin(step));
+
+      // render using requestAnimationFrame
+      requestAnimationFrame(renderScene);
+      render.render(scene, camera);
+    }
+
+    renderScene();
   };
 
   useEffect(() => {
@@ -42,4 +59,4 @@ const Demo3 = () => {
   return <div ref={demo}></div>;
 };
 
-export default Demo3;
+export default Demo4;
