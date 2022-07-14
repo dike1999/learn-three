@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { initStats } from "../../utils/index";
 import model from "./models/model4";
 
 const Demo4 = () => {
+  const stats = initStats(0);
   const demo = useRef<HTMLDivElement>(null);
 
   const init = () => {
@@ -33,7 +35,7 @@ const Demo4 = () => {
     var step = 0;
 
     function renderScene() {
-      // stats.update();
+      stats.update();
       // rotate the cube around its axes
       cube.rotation.x += 0.02;
       cube.rotation.y += 0.02;
