@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { initStats } from "../../utils/index";
+import dat from "dat.gui";
+import { initStats, initTrackballControls } from "../../utils/index";
 import model from "./models/model4";
 
-const Demo4 = () => {
+const Demo5 = () => {
   const stats = initStats(0);
   const demo = useRef<HTMLDivElement>(null);
 
@@ -34,15 +35,32 @@ const Demo4 = () => {
     // call the render function
     let step = 0;
 
+    // var controls = new (function () {
+    //   this.rotationSpeed = 0.02;
+    //   this.bouncingSpeed = 0.03;
+    // })();
+    const controls = {
+      rotationSpeed: 0.02,
+      bouncingSpeed: 0.03,
+    };
+    const gui = new dat.GUI();
+    gui.add(controls, "rotationSpeed", 0, 0.5);
+    gui.add(controls, "bouncingSpeed", 0, 0.5);
+
+    // attach them here, since appendChild needs to be called first
+    const trackballControls = initTrackballControls(camera, renderer);
+    const clock = new THREE.Clock();
+
     function render() {
+      trackballControls.update();
       stats.update();
       // rotate the cube around its axes
-      cube.rotation.x += 0.02;
-      cube.rotation.y += 0.02;
-      cube.rotation.z += 0.02;
+      cube.rotation.x += controls.rotationSpeed;
+      cube.rotation.y += controls.rotationSpeed;
+      cube.rotation.z += controls.rotationSpeed;
 
       // bounce the sphere up and down
-      step += 0.04;
+      step += controls.bouncingSpeed;
       sphere.position.x = 20 + 10 * Math.cos(step);
       sphere.position.y = 2 + 10 * Math.abs(Math.sin(step));
 
@@ -61,4 +79,4 @@ const Demo4 = () => {
   return <div ref={demo}></div>;
 };
 
-export default Demo4;
+export default Demo5;
