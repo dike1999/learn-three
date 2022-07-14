@@ -34,11 +34,6 @@ const Demo5 = () => {
 
     // call the render function
     let step = 0;
-
-    // var controls = new (function () {
-    //   this.rotationSpeed = 0.02;
-    //   this.bouncingSpeed = 0.03;
-    // })();
     const controls = {
       rotationSpeed: 0.02,
       bouncingSpeed: 0.03,
@@ -49,7 +44,6 @@ const Demo5 = () => {
 
     // attach them here, since appendChild needs to be called first
     const trackballControls = initTrackballControls(camera, renderer);
-    const clock = new THREE.Clock();
 
     function render() {
       trackballControls.update();
